@@ -41,11 +41,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.uichallange.R
+
 
 @Preview(showSystemUi = true, showBackground = true, device = Devices.PIXEL_9)
 @Composable
@@ -158,14 +160,27 @@ fun Content() {
                     )
                 }
         )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            "Story Categories",
+            style = TextStyle(color = Color.White),
+            fontSize = 20.sp,
+            textAlign = TextAlign.Left,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 10.dp)
+        )
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+                .fillMaxSize(),
+
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            ItemCard()
-            ItemCard()
-            ItemCard()
-            ItemCard()
+            ItemCard(id = R.drawable.prophet, title = "Prophets")
+            ItemCard(id = R.drawable.sahaba, title = "Sahaba")
+            ItemCard(id = R.drawable.morals, title = "Morals")
+            ItemCard(id = R.drawable.hero, title = "Hero")
         }
 
 
@@ -173,14 +188,14 @@ fun Content() {
 }
 
 @Composable
-fun ItemCard() {
+fun ItemCard(id: Int, title: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
             modifier = Modifier
                 .size(60.dp),
-            painter = painterResource(id = R.drawable.prophet),
+            painter = painterResource(id = id),
             contentDescription = null,
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -199,7 +214,7 @@ fun ItemCard() {
                 .padding(horizontal = 16.dp, vertical = 6.dp)
         ) {
             Text(
-                text = "Prophets",
+                text = title,
                 color = Color.White,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Medium
